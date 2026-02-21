@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../src/App.css";
+import "./App.css";
 
 export default function SplashScreen({ children }) {
   const [isStandalone, setIsStandalone] = useState(false);

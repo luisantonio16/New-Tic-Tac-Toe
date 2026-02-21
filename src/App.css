@@ -44,14 +44,20 @@
 
 
 .splash-container {
-  height: 100vh;
-  width: 100%;
+  position: fixed;      /* rompe cualquier contenedor padre */
+  top: 0;
+  left: 0;
+  width: 100vw;         /* ancho real del viewport */
+  height: 100dvh;       /* altura real en móviles */
+  
   background: linear-gradient(135deg, #0d6efd, #0047b3);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: fadeIn 0.8s ease-in-out;
+
+  z-index: 99999;
 }
 
 .logo-wrapper {

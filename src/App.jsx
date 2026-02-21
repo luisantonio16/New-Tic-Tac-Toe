@@ -31,22 +31,6 @@ const combo_Winner = [
 ];
 
 function App() {
-  const [showSplash, setShowSplash] = useState(false);
-
-  useEffect(() => {
-    const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      window.navigator.standalone === true;
-
-    if (isStandalone) {
-      setShowSplash(true);
-    }
-  }, []);
-
-  if (showSplash) {
-    return <SplashScreen onFinish={() => setShowSplash(false)} />;
-  }
-
   const [turn, setTurn] = useState(turnos.X);
   const [board, setBoard] = useState(Array(9).fill(null));
   const [winner, setWinner] = useState(null);
@@ -92,39 +76,41 @@ function App() {
   };
 
   return (
-    <main className="board">
-      <h1>Tic Tac Toe</h1>
-      <section className="game">
-        {board.map((cell, index) => {
-          return (
-            <Square key={index} index={index} updateBoard={updateBoard}>
-              {board[index]}
-            </Square>
-          );
-        })}
-      </section>
-
-      <section className="turn">
-        <Square isSelected={turn === turnos.X}>{turnos.X}</Square>
-        <Square isSelected={turn === turnos.O}>{turnos.O}</Square>
-      </section>
-
-      <button onClick={resetGame}>Empezar de nuevo</button>
-
-      {winner !== null && (
-        <section className="winner">
-          <div className="text">
-            <h2>{winner === false ? "Empate" : "Gano"}</h2>
-            <header className="win">
-              {winner && <Square>{winner}</Square>}
-            </header>
-            <footer>
-              <button onClick={resetGame}>Empezar de nuevo</button>
-            </footer>
-          </div>
+    <SplashScreen>
+      <main className="board">
+        <h1>Tic Tac Toe</h1>
+        <section className="game">
+          {board.map((cell, index) => {
+            return (
+              <Square key={index} index={index} updateBoard={updateBoard}>
+                {board[index]}
+              </Square>
+            );
+          })}
         </section>
-      )}
-    </main>
+
+        <section className="turn">
+          <Square isSelected={turn === turnos.X}>{turnos.X}</Square>
+          <Square isSelected={turn === turnos.O}>{turnos.O}</Square>
+        </section>
+
+        <button onClick={resetGame}>Empezar de nuevo</button>
+
+        {winner !== null && (
+          <section className="winner">
+            <div className="text">
+              <h2>{winner === false ? "Empate" : "Gano"}</h2>
+              <header className="win">
+                {winner && <Square>{winner}</Square>}
+              </header>
+              <footer>
+                <button onClick={resetGame}>Empezar de nuevo</button>
+              </footer>
+            </div>
+          </section>
+        )}
+      </main>
+    </SplashScreen>
   );
 }
 
